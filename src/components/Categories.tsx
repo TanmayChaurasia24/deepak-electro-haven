@@ -1,7 +1,7 @@
 
 import React, { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { RefrigeratorIcon, WashingMachine, Tv, AirVent, Speaker, Smartphone, Coffee } from "lucide-react";
+import { RefrigeratorIcon, WashingMachine, Tv, AirVent, Speaker, Smartphone, Coffee, AirVentIcon } from "lucide-react";
 
 const Categories = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -58,8 +58,8 @@ const Categories = () => {
       hover: "hover:bg-pink-500 hover:text-white",
     },
     {
-      name: "Smartphones",
-      icon: Smartphone,
+      name: "Air Cooler",
+      icon: AirVentIcon,
       color: "bg-amber-50 text-amber-500",
       hover: "hover:bg-amber-500 hover:text-white",
     },

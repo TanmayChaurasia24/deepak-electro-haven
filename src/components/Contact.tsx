@@ -30,22 +30,22 @@ const Contact = () => {
     {
       icon: MapPin,
       title: "Visit Our Store",
-      details: "123 Main Street, Electronics Market, Delhi, India - 110001"
+      details: "24/26 Navrang Gali, Birhana Road, Kanpur, Uttar Pradesh"
     },
     {
       icon: Phone,
       title: "Call Us",
-      details: "+91 98765 43210"
+      details: "+91 7860001091"
     },
     {
       icon: Mail,
       title: "Email Us",
-      details: "info@deepakagencies.com"
+      details: "deepakchaurasia.kanpur@gmail.com"
     },
     {
       icon: Clock,
       title: "Working Hours",
-      details: "Monday - Saturday: 10:00 AM - 8:00 PM"
+      details: "Monday - Saturday: 12:00 AM - 8:00 PM"
     }
   ];
 
@@ -94,7 +94,7 @@ const Contact = () => {
                   <input
                     type="text"
                     className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
-                    placeholder="John Doe"
+                    placeholder="xyz"
                   />
                 </div>
                 <div>
@@ -102,7 +102,7 @@ const Contact = () => {
                   <input
                     type="email"
                     className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
-                    placeholder="john@example.com"
+                    placeholder="xyz@example.com"
                   />
                 </div>
               </div>
@@ -111,7 +111,7 @@ const Contact = () => {
                 <label className="block text-sm font-medium mb-2">Subject</label>
                 <input
                   type="text"
-                  className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
+                  className="w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
                   placeholder="How can we help you?"
                 />
               </div>
