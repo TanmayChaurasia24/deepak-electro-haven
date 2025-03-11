@@ -4,10 +4,13 @@ import { Link } from "react-router-dom";
 import { Menu, X, Search, ShoppingCart, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
+import { useCart } from "@/contexts/CartContext";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { getCartCount } = useCart();
+  const cartCount = getCartCount();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -69,9 +72,16 @@ const Navbar = () => {
               </Button>
             </Link>
             
-            <Button variant="ghost" size="icon" className="rounded-full">
-              <ShoppingCart className="h-5 w-5" />
-            </Button>
+            <Link to="/cart">
+              <Button variant="ghost" size="icon" className="rounded-full relative">
+                <ShoppingCart className="h-5 w-5" />
+                {cartCount > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                    {cartCount}
+                  </span>
+                )}
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -134,19 +144,33 @@ const Navbar = () => {
               </Link>
               <Link 
                 to="/auth" 
-                className="text-foreground py-2"
+                className="text-foreground py-2 border-b border-border"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Sign In
+              </Link>
+              <Link 
+                to="/cart" 
+                className="text-foreground py-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Cart
               </Link>
             </nav>
             <div className="flex items-center space-x-4 mt-4 pt-4 border-t border-border">
               <Button variant="ghost" size="icon" className="rounded-full">
                 <Search className="h-5 w-5" />
               </Button>
-              <Button variant="ghost" size="icon" className="rounded-full">
-                <ShoppingCart className="h-5 w-5" />
-              </Button>
+              <Link to="/cart">
+                <Button variant="ghost" size="icon" className="rounded-full relative">
+                  <ShoppingCart className="h-5 w-5" />
+                  {cartCount > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                      {cartCount}
+                    </span>
+                  )}
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
