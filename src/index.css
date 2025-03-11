@@ -48,8 +48,8 @@
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 210 100% 50%;
+    --primary-foreground: 210 40% 98%;
 
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
@@ -86,7 +86,7 @@
 
 @layer utilities {
   .glass-card {
-    @apply bg-white/60 backdrop-blur-xl border border-white/20 shadow-lg;
+    @apply bg-white/60 backdrop-blur-xl border border-white/20 shadow-lg dark:bg-background/60 dark:border-background/20;
   }
   
   .subtle-shadow {
@@ -154,6 +154,14 @@
   );
 }
 
+.dark .hero-gradient {
+  background: radial-gradient(
+    circle at center,
+    rgba(13, 41, 109, 0.3) 0%,
+    rgba(0, 10, 30, 0) 70%
+  );
+}
+
 /* Product card hover effect */
 .product-card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -162,6 +170,10 @@
 .product-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+.dark .product-card:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
 }
 
 .product-card img {
