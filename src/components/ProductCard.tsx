@@ -1,7 +1,9 @@
 
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, Heart } from "lucide-react";
+import { ShoppingCart, Heart, Eye } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
 
 interface ProductCardProps {
   id: string;
@@ -24,14 +26,22 @@ const ProductCard: React.FC<ProductCardProps> = ({
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const { addToCart, isInCart } = useCart();
   
   const discountedPrice = discount > 0 
     ? price - (price * (discount / 100))
     : price;
     
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    addToCart({ id, name, category, price, image, isNew, discount });
+  };
+    
   return (
-    <div 
-      className="product-card overflow-hidden rounded-xl bg-white subtle-shadow group"
+    <Link
+      to={`/products/${id}`}
+      className="product-card block overflow-hidden rounded-xl bg-white subtle-shadow group transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:bg-gray-900"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -51,12 +61,18 @@ const ProductCard: React.FC<ProductCardProps> = ({
         </div>
         
         {/* Wishlist Button */}
-        <button className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center transition-transform duration-300 hover:bg-white">
+        <button 
+          className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center transition-transform duration-300 hover:bg-white"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+          }}
+        >
           <Heart className="h-4 w-4 text-gray-600 hover:text-red-500 transition-colors" />
         </button>
         
         {/* Product Image */}
-        <div className="w-full h-full bg-gray-100/50 flex items-center justify-center p-4">
+        <div className="w-full h-full bg-gray-100/50 dark:bg-gray-800/50 flex items-center justify-center p-4">
           <img
             src={image}
             alt={name}
@@ -68,7 +84,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           />
         </div>
         
-        {/* Quick Add button that appears on hover */}
+        {/* Quick View button that appears on hover */}
         <div 
           className={`absolute inset-0 bg-black/5 flex items-center justify-center opacity-0 transition-opacity duration-300 ${
             isHovered ? "opacity-100" : ""
@@ -77,7 +93,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
           <Button
             variant="secondary"
             className="btn-hover-float bg-white hover:bg-white/90 text-foreground shadow-md"
+            onClick={(e) => {
+              // Allow normal link navigation
+            }}
           >
+            <Eye className="mr-2 h-4 w-4" />
             Quick View
           </Button>
         </div>
@@ -98,15 +118,17 @@ const ProductCard: React.FC<ProductCardProps> = ({
         
         <div className="mt-4">
           <Button 
-            variant="outline" 
+            variant={isInCart(id) ? "default" : "outline"}
             className="w-full flex items-center justify-center gap-2 group-hover:bg-primary group-hover:text-white transition-colors duration-300"
+            onClick={handleAddToCart}
+            disabled={isInCart(id)}
           >
             <ShoppingCart className="h-4 w-4" />
-            Add to Cart
+            {isInCart(id) ? "Added to Cart" : "Add to Cart"}
           </Button>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
