@@ -1,5 +1,6 @@
 
 import React, { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -7,6 +8,7 @@ import { RefrigeratorIcon, WashingMachine, Tv, AirVent, Speaker, Smartphone, Cof
 
 const CategoriesPage = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Initialize scroll reveal animation
@@ -32,6 +34,10 @@ const CategoriesPage = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const handleCategoryClick = (categoryName: string) => {
+    navigate(`/products?category=${categoryName}`);
+  };
 
   const categories = [
     {
@@ -153,6 +159,7 @@ const CategoriesPage = () => {
                   <Button 
                     variant="outline" 
                     className="mt-auto border border-current bg-white/50 hover:bg-white group-hover:border-white group-hover:text-current"
+                    onClick={() => handleCategoryClick(category.name)}
                   >
                     View Products
                   </Button>
