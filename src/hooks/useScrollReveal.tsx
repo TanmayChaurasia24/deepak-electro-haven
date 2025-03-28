@@ -9,7 +9,7 @@ interface ScrollRevealOptions {
 
 const useScrollReveal = (options: ScrollRevealOptions = {}) => {
   const { threshold = 0.1, root = null, rootMargin = "0px" } = options;
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
