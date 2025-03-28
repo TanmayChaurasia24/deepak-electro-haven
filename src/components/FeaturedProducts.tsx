@@ -1,24 +1,17 @@
 
-import React, { useEffect, useRef, useState } from "react";
-import ProductCard from "./ProductCard";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ArrowLeft } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import images from "../data/images.json";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
+import useScrollReveal from "../hooks/useScrollReveal";
+import ProductGrid from "./ProductGrid";
+import ProductPagination from "./ui/ProductPagination";
 
 const FeaturedProducts = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4; // Exactly 4 products per row/page
+  const sectionRef = useScrollReveal();
 
   const products = [
     {
@@ -94,61 +87,8 @@ const FeaturedProducts = () => {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = products.slice(indexOfFirstItem, indexOfLastItem);
 
-  const paginate = (pageNumber: number) => {
+  const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
-  };
-
-  // Next and previous page
-  const nextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-
-  const prevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("revealed");
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    const elements = sectionRef.current?.querySelectorAll(".scroll-reveal");
-    elements?.forEach((el) => observer.observe(el));
-
-    return () => {
-      elements?.forEach((el) => observer.unobserve(el));
-    };
-  }, []);
-
-  // Generate pagination items based on total pages
-  const renderPaginationItems = () => {
-    const items = [];
-    
-    for (let i = 1; i <= totalPages; i++) {
-      items.push(
-        <PaginationItem key={i}>
-          <PaginationLink 
-            onClick={() => paginate(i)}
-            isActive={currentPage === i}
-          >
-            {i}
-          </PaginationLink>
-        </PaginationItem>
-      );
-    }
-    
-    return items;
   };
 
   return (
@@ -179,38 +119,14 @@ const FeaturedProducts = () => {
           </Button>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-          {currentItems.map((product, index) => (
-            <div key={product.id} className={`scroll-reveal`} style={{ transitionDelay: `${index * 100}ms` }}>
-              <ProductCard {...product} />
-            </div>
-          ))}
-        </div>
+        <ProductGrid products={currentItems} />
 
-        {/* Pagination Controls using shadcn/ui pagination component */}
-        {totalPages > 1 && (
-          <div className="mt-12 scroll-reveal">
-            <Pagination>
-              <PaginationContent>
-                <PaginationItem>
-                  <PaginationPrevious 
-                    onClick={prevPage}
-                    className={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
-                  />
-                </PaginationItem>
-                
-                {renderPaginationItems()}
-                
-                <PaginationItem>
-                  <PaginationNext 
-                    onClick={nextPage}
-                    className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""}
-                  />
-                </PaginationItem>
-              </PaginationContent>
-            </Pagination>
-          </div>
-        )}
+        <ProductPagination 
+          currentPage={currentPage} 
+          totalPages={totalPages} 
+          onPageChange={handlePageChange} 
+          className="mt-12"
+        />
       </div>
     </section>
   );
