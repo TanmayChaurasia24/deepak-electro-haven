@@ -5,11 +5,20 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import images from "../data/images.json";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
 const FeaturedProducts = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 4;
+  const itemsPerPage = 4; // Exactly 4 products per row/page
 
   const products = [
     {
@@ -122,6 +131,26 @@ const FeaturedProducts = () => {
     };
   }, []);
 
+  // Generate pagination items based on total pages
+  const renderPaginationItems = () => {
+    const items = [];
+    
+    for (let i = 1; i <= totalPages; i++) {
+      items.push(
+        <PaginationItem key={i}>
+          <PaginationLink 
+            onClick={() => paginate(i)}
+            isActive={currentPage === i}
+          >
+            {i}
+          </PaginationLink>
+        </PaginationItem>
+      );
+    }
+    
+    return items;
+  };
+
   return (
     <section id="products" className="py-24 bg-secondary/30" ref={sectionRef}>
       <div className="container mx-auto px-4 md:px-6">
@@ -158,42 +187,28 @@ const FeaturedProducts = () => {
           ))}
         </div>
 
-        {/* Pagination Controls */}
+        {/* Pagination Controls using shadcn/ui pagination component */}
         {totalPages > 1 && (
-          <div className="flex justify-center items-center mt-12">
-            <Button 
-              onClick={prevPage} 
-              disabled={currentPage === 1} 
-              variant="outline" 
-              size="icon" 
-              className="mr-2"
-            >
-              <ArrowLeft className="h-4 w-4" />
-            </Button>
-            
-            <div className="flex space-x-2">
-              {Array.from({ length: totalPages }).map((_, index) => (
-                <Button
-                  key={index}
-                  onClick={() => paginate(index + 1)}
-                  variant={currentPage === index + 1 ? "default" : "outline"}
-                  size="sm"
-                  className="w-8 h-8 p-0"
-                >
-                  {index + 1}
-                </Button>
-              ))}
-            </div>
-            
-            <Button 
-              onClick={nextPage} 
-              disabled={currentPage === totalPages} 
-              variant="outline" 
-              size="icon" 
-              className="ml-2"
-            >
-              <ArrowRight className="h-4 w-4" />
-            </Button>
+          <div className="mt-12 scroll-reveal">
+            <Pagination>
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious 
+                    onClick={prevPage}
+                    className={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
+                  />
+                </PaginationItem>
+                
+                {renderPaginationItems()}
+                
+                <PaginationItem>
+                  <PaginationNext 
+                    onClick={nextPage}
+                    className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""}
+                  />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
           </div>
         )}
       </div>
