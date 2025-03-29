@@ -56,6 +56,9 @@ const Navbar = () => {
             <Link to="/contact" className="text-foreground/90 hover:text-primary transition-colors">
               Contact
             </Link>
+            <Link to="/booking" className="text-foreground/90 hover:text-primary transition-colors">
+              Book
+            </Link>
           </nav>
 
           {/* Desktop Actions */}

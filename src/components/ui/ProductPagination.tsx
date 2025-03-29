@@ -78,7 +78,7 @@ const ProductPagination = ({
           <PaginationItem>
             <PaginationPrevious
               onClick={handlePrevious}
-              className={`rounded-lg ${currentPage === 1 ? "pointer-events-none opacity-50" : ""}`}
+              className={`rounded-lg min-w-min ${currentPage === 1 ? "pointer-events-none opacity-50" : ""}`}
             >
               Previous
             </PaginationPrevious>
@@ -103,7 +103,7 @@ const ProductPagination = ({
           <PaginationItem>
             <PaginationNext
               onClick={handleNext}
-              className={`rounded-lg ${currentPage === totalPages ? "pointer-events-none opacity-50" : ""}`}
+              className={`rounded-lg min-w-fit ${currentPage === totalPages ? "pointer-events-none opacity-50" : ""}`}
             >
               Next
             </PaginationNext>

@@ -1,5 +1,4 @@
-
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { products, categories } from "@/data/products";
@@ -18,7 +17,7 @@ import useScrollReveal from "@/hooks/useScrollReveal";
 const ProductsPage = () => {
   const sectionRef = useScrollReveal();
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 20; // 4 products per row, 5 rows per page
+  const itemsPerPage = 12; // Changed for better grid layout
   
   // Use our custom hook for filtering logic
   const {
@@ -38,10 +37,10 @@ const ProductsPage = () => {
     resetFilters,
   } = useProductFiltering({ allProducts: products, categories });
 
-  // Reset to first page when filters change
+  // Reset to first page when any filter changes
   useEffect(() => {
     setCurrentPage(1);
-  }, [filteredProducts.length]);
+  }, [activeCategory, searchQuery, sortOrder, priceRange, showOnlyNew, showOnlyDiscount]);
   
   // Calculate total pages
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
@@ -50,6 +49,19 @@ const ProductsPage = () => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentProducts = filteredProducts.slice(indexOfFirstItem, indexOfLastItem);
+
+  // Get category-specific products count
+  const getCategoryProductCount = useCallback((category: string) => {
+    if (category === "All Products") return products.length;
+    return products.filter(product => 
+      product.category.toLowerCase() === category.toLowerCase()
+    ).length;
+  }, [products]);
+  
+  // Debug info - remove in production
+  console.log('Active Category:', activeCategory);
+  console.log('Filtered Products:', filteredProducts.length);
+  console.log('Current Products:', currentProducts.length);
   
   return (
     <div className="min-h-screen bg-background" ref={sectionRef}>
@@ -64,9 +76,7 @@ const ProductsPage = () => {
             <ProductSearch 
               value={searchQuery}
               onChange={handleSearchChange}
-              onClear={() => {
-                handleSearchChange("");
-              }}
+              onClear={() => handleSearchChange("")}
             />
           </div>
           
@@ -75,10 +85,11 @@ const ProductsPage = () => {
             <CategoryTabs 
               categories={categories} 
               activeCategory={activeCategory} 
-              onCategoryChange={handleCategoryChange} 
+              onCategoryChange={handleCategoryChange}
+              getProductCount={getCategoryProductCount}
             />
             
-            <div className="flex items-center gap-3 scroll-reveal">
+            <div className="flex flex-wrap items-center gap-3 scroll-reveal">
               <ProductSort 
                 value={sortOrder}
                 onValueChange={(value) => setSortOrder(value)}
