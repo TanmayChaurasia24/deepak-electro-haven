@@ -201,3 +201,72 @@
 .btn-hover-float:hover {
   transform: translateY(-2px);
 }
+
+/* Pagination styles */
+.pagination-link {
+  @apply rounded-lg focus:ring-2 focus:ring-primary/50 focus:outline-none;
+}
+
+.dark .pagination-link.active {
+  @apply bg-primary text-primary-foreground border-primary;
+}
+
+.light .pagination-link.active {
+  @apply bg-primary text-primary-foreground;
+}
+
+/* Calendar styles */
+.rdp {
+  --rdp-cell-size: 40px; /* Size of calendar day cells */
+  --rdp-accent-color: hsl(var(--primary)); /* Accent color for selection */
+  --rdp-background-color: hsl(var(--primary) / 0.2); /* Background for selected dates */
+  --rdp-accent-color-dark: hsl(var(--primary)); /* Darker accent for buttons */
+  --rdp-background-color-dark: hsl(var(--primary) / 0.2); /* Darker background for buttons */
+  --rdp-outline: 2px solid hsl(var(--primary) / 0.2); /* Outline for focused elements */
+  --rdp-outline-selected: 2px solid hsl(var(--primary)); /* Outline for selected elements */
+}
+
+.dark .rdp-day_selected, 
+.dark .rdp-day_selected:focus-visible, 
+.dark .rdp-day_selected:hover {
+  color: hsl(var(--primary-foreground));
+  opacity: 1;
+  background-color: hsl(var(--primary));
+}
+
+.light .rdp-day_selected, 
+.light .rdp-day_selected:focus-visible, 
+.light .rdp-day_selected:hover {
+  color: hsl(var(--primary-foreground));
+  opacity: 1;
+  background-color: hsl(var(--primary));
+}
+
+/* Time slot selection in booking system */
+.time-slot {
+  @apply p-2 border rounded-md text-center cursor-pointer transition-colors;
+}
+
+.time-slot.available {
+  @apply bg-secondary text-secondary-foreground hover:bg-primary/20;
+}
+
+.time-slot.selected {
+  @apply bg-primary text-primary-foreground;
+}
+
+.time-slot.unavailable {
+  @apply bg-muted text-muted-foreground cursor-not-allowed;
+}
+
+.dark .time-slot.available {
+  @apply bg-secondary text-secondary-foreground hover:bg-primary/20;
+}
+
+.dark .time-slot.selected {
+  @apply bg-primary text-primary-foreground;
+}
+
+.dark .time-slot.unavailable {
+  @apply bg-muted/50 text-muted-foreground cursor-not-allowed;
+}

@@ -9,9 +9,9 @@ interface NoProductsFoundProps {
 
 const NoProductsFound = ({ onResetFilters }: NoProductsFoundProps) => {
   return (
-    <div className="text-center py-16 scroll-reveal">
+    <div className="text-center py-16 scroll-reveal bg-background/50 rounded-lg p-8 border border-border">
       <div className="text-7xl mb-4">😕</div>
-      <h3 className="text-2xl font-bold mb-2">No Products Found</h3>
+      <h3 className="text-2xl font-bold mb-2 text-foreground">No Products Found</h3>
       <p className="text-muted-foreground mb-6">
         We couldn't find any products that match your current filters.
       </p>

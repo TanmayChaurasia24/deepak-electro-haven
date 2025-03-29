@@ -13,6 +13,7 @@ import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
 import AuthPage from "./pages/AuthPage";
 import CartPage from "./pages/CartPage";
+import BookingPage from "./pages/BookingPage";
 import NotFound from "./pages/NotFound";
 import { CartProvider } from "./contexts/CartContext";
 
@@ -35,6 +36,7 @@ const App = () => (
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/auth" element={<AuthPage />} />
               <Route path="/cart" element={<CartPage />} />
+              <Route path="/booking" element={<BookingPage />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

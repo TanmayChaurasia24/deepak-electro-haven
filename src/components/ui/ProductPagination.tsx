@@ -36,6 +36,41 @@ const ProductPagination = ({
 
   if (totalPages <= 1) return null;
 
+  // Calculate visible page numbers
+  const getVisiblePages = () => {
+    // Show a maximum of 5 page numbers
+    if (totalPages <= 5) {
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
+    }
+
+    // If we're near the beginning
+    if (currentPage <= 3) {
+      return [1, 2, 3, 4, 5];
+    }
+
+    // If we're near the end
+    if (currentPage >= totalPages - 2) {
+      return [
+        totalPages - 4,
+        totalPages - 3,
+        totalPages - 2,
+        totalPages - 1,
+        totalPages,
+      ];
+    }
+
+    // In the middle
+    return [
+      currentPage - 2,
+      currentPage - 1,
+      currentPage,
+      currentPage + 1,
+      currentPage + 2,
+    ];
+  };
+
+  const visiblePages = getVisiblePages();
+
   return (
     <div className={`${className} scroll-reveal`}>
       <Pagination>
@@ -43,17 +78,24 @@ const ProductPagination = ({
           <PaginationItem>
             <PaginationPrevious
               onClick={handlePrevious}
-              className={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
-            />
+              className={`rounded-lg ${currentPage === 1 ? "pointer-events-none opacity-50" : ""}`}
+            >
+              Previous
+            </PaginationPrevious>
           </PaginationItem>
 
-          {Array.from({ length: totalPages }).map((_, i) => (
-            <PaginationItem key={i}>
+          {visiblePages.map((pageNum) => (
+            <PaginationItem key={pageNum}>
               <PaginationLink
-                onClick={() => onPageChange(i + 1)}
-                isActive={currentPage === i + 1}
+                onClick={() => onPageChange(pageNum)}
+                isActive={currentPage === pageNum}
+                className={`rounded-lg ${
+                  currentPage === pageNum
+                    ? "bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground"
+                    : ""
+                }`}
               >
-                {i + 1}
+                {pageNum}
               </PaginationLink>
             </PaginationItem>
           ))}
@@ -61,8 +103,10 @@ const ProductPagination = ({
           <PaginationItem>
             <PaginationNext
               onClick={handleNext}
-              className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""}
-            />
+              className={`rounded-lg ${currentPage === totalPages ? "pointer-events-none opacity-50" : ""}`}
+            >
+              Next
+            </PaginationNext>
           </PaginationItem>
         </PaginationContent>
       </Pagination>
