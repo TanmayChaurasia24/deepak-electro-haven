@@ -86,11 +86,11 @@ const Contact = () => {
           
           <div className="lg:col-span-3 rounded-xl overflow-hidden subtle-shadow scroll-reveal">
             <form className="bg-white p-6 md:p-8 rounded-xl">
-              <h3 className="text-xl font-semibold mb-6">Send Us a Message</h3>
+              <h3 className="text-xl font-semibold mb-6 text-black/80">Send Us a Message</h3>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div>
-                  <label className="block text-sm font-medium mb-2">Your Name</label>
+                  <label className="block text-sm font-medium mb-2 text-black/80">Your Name</label>
                   <input
                     type="text"
                     className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
@@ -98,7 +98,7 @@ const Contact = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-2">Your Email</label>
+                  <label className="block text-sm font-medium mb-2 text-black/80">Your Email</label>
                   <input
                     type="email"
                     className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
@@ -108,7 +108,7 @@ const Contact = () => {
               </div>
               
               <div className="mb-6">
-                <label className="block text-sm font-medium mb-2">Subject</label>
+                <label className="block text-sm font-medium mb-2 text-black/80">Subject</label>
                 <input
                   type="text"
                   className="w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
@@ -117,14 +117,14 @@ const Contact = () => {
               </div>
               
               <div className="mb-6">
-                <label className="block text-sm font-medium mb-2">Your Message</label>
+                <label className="block text-sm font-medium mb-2 text-black/80">Your Message</label>
                 <textarea
                   className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors min-h-[120px]"
                   placeholder="Type your message here..."
                 ></textarea>
               </div>
               
-              <Button className="w-full">Send Message</Button>
+              <Button className="w-full bg-blue-600 text-white hover:bg-blue-700">Send Message</Button>
             </form>
           </div>
         </div>

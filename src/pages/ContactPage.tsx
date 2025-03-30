@@ -118,7 +118,7 @@ const ContactPage = () => {
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-6">
                   <item.icon className="h-6 w-6" />
                 </div>
-                <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
+                <h3 className="text-lg font-semibold mb-2 text-black/80">{item.title}</h3>
                 <p className="text-muted-foreground mb-4">{item.details}</p>
                 {item.link && (
                   <a href={item.link} className="text-primary hover:underline text-sm font-medium">
@@ -138,11 +138,11 @@ const ContactPage = () => {
             {/* Contact Form */}
             <div className="scroll-reveal">
               <div className="bg-white p-8 rounded-xl shadow-sm border border-border">
-                <h2 className="text-2xl font-bold mb-6">Send Us a Message</h2>
+                <h2 className="text-2xl font-bold mb-6 text-black/80">Send Us a Message</h2>
                 <form className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium mb-2">Your Name</label>
+                      <label htmlFor="name" className="block text-sm text-black/80 font-medium mb-2">Your Name</label>
                       <input
                         id="name"
                         type="text"
@@ -151,7 +151,7 @@ const ContactPage = () => {
                       />
                     </div>
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium mb-2">Your Email</label>
+                      <label htmlFor="email" className="block text-sm text-black/80 font-medium mb-2">Your Email</label>
                       <input
                         id="email"
                         type="email"
@@ -162,7 +162,7 @@ const ContactPage = () => {
                   </div>
                   
                   <div>
-                    <label htmlFor="phone" className="block text-sm font-medium mb-2">Phone Number</label>
+                    <label htmlFor="phone" className="block text-sm text-black/80 font-medium mb-2">Phone Number</label>
                     <input
                       id="phone"
                       type="tel"
@@ -172,7 +172,7 @@ const ContactPage = () => {
                   </div>
                   
                   <div>
-                    <label htmlFor="subject" className="block text-sm font-medium mb-2">Subject</label>
+                    <label htmlFor="subject" className="block text-sm text-black/80 font-medium mb-2">Subject</label>
                     <input
                       id="subject"
                       type="text"
@@ -182,7 +182,7 @@ const ContactPage = () => {
                   </div>
                   
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium mb-2">Your Message</label>
+                    <label htmlFor="message" className="block text-sm text-black/80 font-medium mb-2">Your Message</label>
                     <textarea
                       id="message"
                       rows={4}
@@ -214,7 +214,7 @@ const ContactPage = () => {
               </div>
               
               <div className="bg-white p-8 rounded-xl shadow-sm border border-border">
-                <h3 className="text-xl font-bold mb-4">Other Ways to Reach Us</h3>
+                <h3 className="text-xl font-bold mb-4  text-black/80">Other Ways to Reach Us</h3>
                 
                 <div className="space-y-6">
                   <div className="flex items-start gap-4">
@@ -222,7 +222,7 @@ const ContactPage = () => {
                       <MessageSquare className="h-5 w-5" />
                     </div>
                     <div>
-                      <h4 className="font-medium mb-1">Live Chat</h4>
+                      <h4 className="font-medium mb-1 text-black/80">Live Chat</h4>
                       <p className="text-sm text-muted-foreground mb-2">
                         Chat with our customer support team in real-time.
                       </p>
@@ -237,7 +237,7 @@ const ContactPage = () => {
                       <Headphones className="h-5 w-5" />
                     </div>
                     <div>
-                      <h4 className="font-medium mb-1">Customer Support</h4>
+                      <h4 className="font-medium mb-1 text-black/80">Customer Support</h4>
                       <p className="text-sm text-muted-foreground mb-2">
                         Our dedicated support team is available during business hours.
                       </p>
@@ -277,7 +277,7 @@ const ContactPage = () => {
                   className="bg-white p-6 rounded-xl shadow-sm border border-border scroll-reveal"
                   style={{ transitionDelay: `${index * 100}ms` }}
                 >
-                  <h3 className="text-lg font-semibold mb-3">{item.question}</h3>
+                  <h3 className="text-lg font-semibold mb-3 text-black/80">{item.question}</h3>
                   <p className="text-muted-foreground">{item.answer}</p>
                 </div>
               ))}

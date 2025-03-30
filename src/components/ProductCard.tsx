@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -86,13 +85,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
         
         {/* Quick View button that appears on hover */}
         <div 
-          className={`absolute inset-0 bg-black/5 flex items-center justify-center opacity-0 transition-opacity duration-300 ${
+          className={`absolute inset-0 bg-black/5 dark:bg-white/5 flex items-center justify-center opacity-0 transition-opacity duration-300 ${
             isHovered ? "opacity-100" : ""
           }`}
         >
           <Button
             variant="secondary"
-            className="btn-hover-float bg-white hover:bg-white/90 text-foreground shadow-md"
+            className="btn-hover-float bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 shadow-md transition-colors"
             onClick={(e) => {
               // Allow normal link navigation
             }}

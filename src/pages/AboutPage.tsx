@@ -249,7 +249,7 @@ const AboutPage = () => {
                 <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-6">
                   <value.icon className="h-8 w-8" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3">{value.title}</h3>
+                <h3 className="text-xl text-blue-600 font-semibold mb-3">{value.title}</h3>
                 <p className="text-muted-foreground">{value.description}</p>
               </div>
             ))}
@@ -297,7 +297,7 @@ const AboutPage = () => {
                   }`}>
                     <div className="bg-white p-6 rounded-xl shadow-sm border border-border">
                       <div className="text-sm text-primary font-semibold mb-2">{milestone.year}</div>
-                      <h3 className="text-xl font-bold mb-2">{milestone.title}</h3>
+                      <h3 className="text-xl text-blue-600 font-bold mb-2">{milestone.title}</h3>
                       <p className="text-muted-foreground">{milestone.description}</p>
                     </div>
                   </div>
@@ -343,7 +343,7 @@ const AboutPage = () => {
                     />
                   </div>
                   <div className="p-6 text-center">
-                    <h3 className="text-xl font-semibold mb-1">{member.name}</h3>
+                    <h3 className="text-xl font-semibold text-black/80 mb-1">{member.name}</h3>
                     <p className="text-sm text-muted-foreground mb-4">{member.position}</p>
                     <div className="flex justify-center gap-4">
                       <button className="text-gray-400 hover:text-primary transition-colors">
